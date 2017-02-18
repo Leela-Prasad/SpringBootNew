@@ -9,7 +9,11 @@ public class SpringBootExamplesApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(SpringBootExamplesApplication.class, args);
-		HelloWorld helloWorld = (HelloWorld)context.getBean("helloWorld");
-		helloWorld.sayHello();
+		ConstructorInjectionService constructorSevice = (ConstructorInjectionService)context.getBean("constructorInjectionService");
+		constructorSevice.getMessage();
+		
+		SetterInjectionService setterService = (SetterInjectionService)context.getBean("setterInjectionService");
+		setterService.getMessage();
+		
 	}
 }
