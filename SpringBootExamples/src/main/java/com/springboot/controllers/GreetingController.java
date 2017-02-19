@@ -10,8 +10,8 @@ public class GreetingController {
 		this.helloWorldService=helloWorldService;
 	}
 	
-	public void getGreeting() {
-		helloWorldService.sayHello();
+	public String getGreeting() {
+		return helloWorldService.sayHello();
 	}
 	
 }

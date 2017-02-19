@@ -3,8 +3,8 @@ package com.springboot.services;
 public class HelloWorldServiceEnglishImpl implements HelloWorldService {
 
 	@Override
-	public void sayHello() {
-		System.out.println("Hello World!!!");
+	public String sayHello() {
+		return "Hello World!!!";
 		
 	}
 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="helloWorldFactory" class="com.springboot.services.HelloWorldFactory" />
+
+
+	<beans profile="french">
+		<import resource="classpath:spring/french-helloworld.xml" />
+	</beans>
+	
+	<beans profile="german">
+		<import resource="classpath:spring/german-helloworld.xml" />
+	</beans>
+	<beans profile="polish">
+		<import resource="classpath:spring/polish-helloworld.xml" />
+	</beans>
+
+	<beans profile="russian">
+		<import resource="classpath:spring/russian-helloworld.xml" />
+	</beans>
+
+	<beans profile="english">
+		<import resource="classpath:spring/english-helloworld.xml" />
+	</beans>
+
+	<beans profile="spanish">
+		<import resource="classpath:spring/spanish-helloworld.xml" />
+	</beans>
+
+</beans>
