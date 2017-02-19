@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="com.springboot" />
+
+	<bean id="greetingController" class="com.springboot.controllers.GreetingController">
+		<property name="helloWorldService" ref="helloWorldServiceConfigured" />
+	</bean>
+
+	<bean id="helloWorldFactory" class="com.springboot.services.HelloWorldFactory" />
+
+
+	<beans profile="french">
+		<bean id="helloWorldServiceConfigured" factory-bean="helloWorldFactory"
+			factory-method="createHelloWorldService">
+			<constructor-arg name="languageCode" value="fr" />
+		</bean>
+	</beans>
+	<beans profile="german">
+		<bean id="helloWorldServiceConfigured" factory-bean="helloWorldFactory"
+			factory-method="createHelloWorldService">
+			<constructor-arg name="languageCode" value="de" />
+		</bean>
+	</beans>
+	<beans profile="polish">
+		<bean id="helloWorldServiceConfigured" factory-bean="helloWorldFactory"
+			factory-method="createHelloWorldService">
+			<constructor-arg name="languageCode" value="pl" />
+		</bean>
+	</beans>
+
+	<beans profile="russian">
+		<bean id="helloWorldServiceConfigured" factory-bean="helloWorldFactory"
+			factory-method="createHelloWorldService">
+			<constructor-arg name="languageCode" value="ru" />
+		</bean>
+	</beans>
+
+	<beans profile="english">
+		<bean id="helloWorldServiceConfigured" factory-bean="helloWorldFactory"
+			factory-method="createHelloWorldService" primary="true">
+			<constructor-arg name="languageCode" value="en" />
+		</bean>
+	</beans>
+
+	<beans profile="spanish">
+		<bean id="helloWorldServiceConfigured" factory-bean="helloWorldFactory"
+			factory-method="createHelloWorldService" primary="true">
+			<constructor-arg name="languageCode" value="es" />
+		</bean>
+	</beans>
+</beans>

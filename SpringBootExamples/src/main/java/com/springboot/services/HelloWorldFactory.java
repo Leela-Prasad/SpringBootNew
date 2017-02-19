@@ -2,7 +2,7 @@ package com.springboot.services;
 
 public class HelloWorldFactory {
 	
-	public static HelloWorldService createHelloWorldService(String languageCode) {
+	public  HelloWorldService createHelloWorldService(String languageCode) {
 		HelloWorldService helloWorldService;
 		switch(languageCode) {
 		case "en": 
