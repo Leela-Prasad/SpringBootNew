@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Customers List</title>
+<link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+	  th:href="@{webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+
+<script src="http://cdn.jsdelivr.net/webjars/jquery/3.1.1/jquery.min.js"
+		th:src="@{webjars/jquery/3.1.1/jauery.min.js}"></script>
+		
+</head>
+<body>
+
+	<div class="container">
+		<div th:if="!${#lists.isEmpty(customers)}">
+		<h2>Customers List</h2>
+		
+		<table class="table table-striped">
+			<tr>
+				<td>Id</td>
+				<td>First Name</td>
+				<td>Last Name</td>
+				<td>Email ID</td>
+				<td>Phone Number</td>
+				<td>Address Line1</td>
+				<td>Address Line2</td>
+				<td>City</td>
+				<td>State</td>
+				<td>Zipcode</td>
+				<td>List</td>
+				<td>Edit</td>
+				<td>delete</td>
+			</tr>
+				
+			<tr th:each="customer : ${customers}">
+				<td th:text="${customer.id}"></td>
+				<td th:text="${customer.firstName}"></td>
+				<td th:text="${customer.lastName}"></td>
+				<td th:text="${customer.emailId}"></td>
+				<td th:text="${customer.phoneNumber}"></td>
+				<td th:text="${customer.addressLine1}"></td>
+				<td th:text="${customer.addressLine2}"></td>
+				<td th:text="${customer.city}"></td>
+				<td th:text="${customer.state}"></td>
+				<td th:text="${customer.zipcode}"></td>
+				<td><a th:href="${'/customer/' + customer.id}">View</a></td>
+				<td><a th:href="${'/customer/edit/' + customer.id}">Edit</a></td>
+				<td><a th:href="${'/customer/delete/' + customer.id}">Delete</a></td>
+			</tr>
+		</table>
+		<div class="row">
+			<a href="/customer/new">New Product</a>
+		</div>
+	</div>
+	
+	<div th:unless="!${#lists.isEmpty(customers)}">
+		<h2>No customers found</h2>
+		<div class="row">
+			<a href="/customer/new">New Product</a>
+		</div>
+	</div>		
+	</div>
+
+</body>
+</html>

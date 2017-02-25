@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Customer Details</title>
+
+<link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+	  th:href="@{webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+
+<script src="http://cdn.jsdelivr.net/webjars/jquery/3.1.1/jquery.min.js"
+		th:src="@{webjars/jquery/3.1.1/jauery.min.js}"></script>
+
+</head>
+<body>
+
+<div class="container">
+	<h2>Customer Details</h2>
+	<table class="table table-striped">
+		<tr>
+			<td>First Name</td>
+			<td>Last Name</td>
+			<td>Email ID</td>
+			<td>Phone Number</td>
+			<td>Address Line1</td>
+			<td>Address Line2</td>
+			<td>City</td>
+			<td>State</td>
+			<td>Zipcode</td>
+		</tr>
+	
+		<tr>
+			<td th:text="${customer.firstName}"></td>
+			<td th:text="${customer.lastName}"></td>
+			<td th:text="${customer.emailId}"></td>
+			<td th:text="${customer.phoneNumber}"></td>
+			<td th:text="${customer.addressLine1}"></td>
+			<td th:text="${customer.addressLine2}"></td>
+			<td th:text="${customer.city}"></td>
+			<td th:text="${customer.state}"></td>
+			<td th:text="${customer.zipcode}"></td>
+		</tr>	
+	</table>
+	<div class="row">
+		<a href="/customers">Customers Page</a>
+	</div>
+</div>
+</body>
+</html>
