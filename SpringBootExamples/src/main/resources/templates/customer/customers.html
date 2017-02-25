@@ -4,10 +4,10 @@
 <meta charset="UTF-8" />
 <title>Customers List</title>
 <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
-	  th:href="@{webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+	  th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
 
 <script src="http://cdn.jsdelivr.net/webjars/jquery/3.1.1/jquery.min.js"
-		th:src="@{webjars/jquery/3.1.1/jauery.min.js}"></script>
+		th:src="@{/webjars/jquery/3.1.1/jauery.min.js}"></script>
 		
 </head>
 <body>
@@ -44,7 +44,7 @@
 				<td th:text="${customer.city}"></td>
 				<td th:text="${customer.state}"></td>
 				<td th:text="${customer.zipcode}"></td>
-				<td><a th:href="${'/customer/' + customer.id}">View</a></td>
+				<td><a th:href="${'/customer/show/' + customer.id}">View</a></td>
 				<td><a th:href="${'/customer/edit/' + customer.id}">Edit</a></td>
 				<td><a th:href="${'/customer/delete/' + customer.id}">Delete</a></td>
 			</tr>

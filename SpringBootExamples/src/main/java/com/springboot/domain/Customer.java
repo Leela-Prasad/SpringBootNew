@@ -1,6 +1,6 @@
 package com.springboot.domain;
 
-public class Customer {
+public class Customer implements DomainObject{
 
 	private Integer id;
 	private String firstName;
@@ -13,9 +13,11 @@ public class Customer {
 	private String state;
 	private String zipcode;
 	
+	@Override
 	public Integer getId() {
 		return id;
 	}
+	@Override
 	public void setId(Integer id) {
 		this.id = id;
 	}

@@ -1,24 +1,17 @@
 package com.springboot.service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import com.springboot.domain.Customer;
+import com.springboot.domain.DomainObject;
 
 @Service
-public class CustomerServiceImpl implements CustomerService{
-
-	private Map<Integer,Customer> customers = new HashMap<>();
-	public CustomerServiceImpl() {
-		loadCustomers();
-	}
+public class CustomerServiceImpl extends AbstractMapService implements CustomerService{
 	
-	public void loadCustomers() {
+	@Override
+	public void loadDomainObjects() {
 		Customer customer1 = new Customer();
 		customer1.setId(1);
 		customer1.setFirstName("firstName1");
@@ -55,36 +48,29 @@ public class CustomerServiceImpl implements CustomerService{
 		customer3.setPhoneNumber("phoneNumber3");
 		customer3.setZipcode("zipcode3");
 		
-		customers.put(customer1.getId(),customer1);
-		customers.put(customer2.getId(),customer2);
-		customers.put(customer3.getId(),customer3);
+		domainMap.put(customer1.getId(),customer1);
+		domainMap.put(customer2.getId(),customer2);
+		domainMap.put(customer3.getId(),customer3);
 	}
 	
 	@Override
-	public List<Customer> listCustomers() {
-		List<Customer> customerList = new ArrayList<>();
-		customerList.addAll(customers.values());
-		return customerList;
+	public List<DomainObject> listAll() {
+		return super.listAll();
 	}
 	
 	@Override
-	public Customer getCustomerById(Integer id) {
-		return customers.get(id);
+	public Customer getById(Integer id) {
+		return (Customer) super.getById(id);
 	}
 	
 	@Override
-	public Customer saveOrUpdate(Customer customer) {
-		if(customer.getId()==null) {
-			customer.setId(Collections.max(customers.keySet())+1);
-		}
-		customers.put(customer.getId(), customer);
-		return customer;
-		
+	public  Customer saveOrUpdate(Customer domainObject) {
+		return (Customer) super.saveOrUpdate(domainObject);
 	}
 	
 	@Override
 	public void delete(Integer id) {
-		customers.remove(id);
-		
+		 super.delete(id);
 	}
+	
 }

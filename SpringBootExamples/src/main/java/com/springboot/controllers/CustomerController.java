@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.springboot.domain.Customer;
 import com.springboot.service.CustomerService;
 
+
 @Controller
+@RequestMapping("/customer")
 public class CustomerController {
 
 	private CustomerService customerService;
@@ -20,45 +22,40 @@ public class CustomerController {
 		this.customerService=customerService;
 	}
 	
-	@RequestMapping("/")
-	public String home() {
-		return "home";
-	}
-	
-	@RequestMapping("/customers")
+	@RequestMapping({"/list","/"})
 	public String listCustomers(Model model) {
-		model.addAttribute("customers",customerService.listCustomers());
-		return "customers";
+		model.addAttribute("customers",customerService.listAll());
+		return "customer/customers";
 	}
 	
-	@RequestMapping("/customer/{id}")
+	@RequestMapping("/show/{id}")
 	public String getCustomer(@PathVariable Integer id,Model model) {
-		model.addAttribute("customer",customerService.getCustomerById(id));
-		return "customer";
+		model.addAttribute("customer",customerService.getById(id));
+		return "customer/customer";
 	}
 	
-	@RequestMapping(value="/customer/new")
+	@RequestMapping(value="/new")
 	public String newCustomer(Model model) {
 		model.addAttribute("customer",new Customer());
-		return "customerform";
+		return "customer/customerform";
 	}
 	
-	@RequestMapping(value="/customer",method=RequestMethod.POST) 
+	@RequestMapping(method=RequestMethod.POST) 
 	public String saveOrUpdate(Customer customer) {
 		Customer savedOrUpdatedCustomer = customerService.saveOrUpdate(customer);
-		return "redirect:/customer/" + savedOrUpdatedCustomer.getId();
+		return "redirect:/customer/show/" + savedOrUpdatedCustomer.getId();
 	}
 	
-	@RequestMapping("/customer/edit/{id}")
+	@RequestMapping("/edit/{id}")
 	public String edit(@PathVariable Integer id,Model model) {
-		model.addAttribute("customer",customerService.getCustomerById(id));
-		return "customerform";
+		model.addAttribute("customer",customerService.getById(id));
+		return "customer/customerform";
 	}
 	
-	@RequestMapping("/customer/delete/{id}")
+	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable Integer id) {
 		customerService.delete(id);
-		return "redirect:/customers";
+		return "redirect:/customer/list";
 	}
 	
 }
