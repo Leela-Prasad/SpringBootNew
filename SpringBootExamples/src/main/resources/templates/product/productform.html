@@ -19,6 +19,7 @@
 			<form class="form-horizontal" th:object="${product}"
 				th:action="@{/product}" th:method="post">
 				<input type="hidden" th:field="${product.id}" />
+				<input type="hidden" th:field="${product.version}" />
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Description : </label>
 					<div class="col-sm-10">

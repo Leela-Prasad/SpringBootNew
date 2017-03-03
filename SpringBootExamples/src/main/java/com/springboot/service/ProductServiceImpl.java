@@ -3,6 +3,7 @@ package com.springboot.service;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.springboot.domain.DomainObject;
@@ -10,6 +11,7 @@ import com.springboot.domain.Product;
 
 
 @Service
+@Profile("map")
 public class ProductServiceImpl extends AbstractMapService implements ProductService{
 	
 	public void  loadDomainObjects() {

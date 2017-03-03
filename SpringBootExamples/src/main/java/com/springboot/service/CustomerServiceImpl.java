@@ -2,12 +2,14 @@ package com.springboot.service;
 
 import java.util.List;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.springboot.domain.Customer;
 import com.springboot.domain.DomainObject;
 
 @Service
+@Profile("map")
 public class CustomerServiceImpl extends AbstractMapService implements CustomerService{
 	
 	@Override
