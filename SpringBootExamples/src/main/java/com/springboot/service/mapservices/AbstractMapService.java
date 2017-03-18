@@ -1,4 +1,4 @@
-package com.springboot.service;
+package com.springboot.service.mapservices;
 
 import java.util.ArrayList;
 import java.util.Collections;

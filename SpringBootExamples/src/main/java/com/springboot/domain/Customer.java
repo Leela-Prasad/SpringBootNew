@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
 @Entity
@@ -23,6 +24,9 @@ public class Customer implements DomainObject{
 	private String city;
 	private String state;
 	private String zipcode;
+	
+	@OneToOne
+	private User user;
 	
 	@Override
 	public Integer getId() {
@@ -91,6 +95,13 @@ public class Customer implements DomainObject{
 	}
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
+	}
+		
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 	@Override
 	public String toString() {

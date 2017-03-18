@@ -1,4 +1,4 @@
-package com.springboot.service;
+package com.springboot.service.mapservices;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.springboot.domain.Customer;
 import com.springboot.domain.DomainObject;
+import com.springboot.service.CustomerService;
 
 @Service
 @Profile("map")

@@ -1,4 +1,4 @@
-package com.springboot.service;
+package com.springboot.service.mapservices;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.springboot.domain.DomainObject;
 import com.springboot.domain.Product;
+import com.springboot.service.ProductService;
 
 
 @Service

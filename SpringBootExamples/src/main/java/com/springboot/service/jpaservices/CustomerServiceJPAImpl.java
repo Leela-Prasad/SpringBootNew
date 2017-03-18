@@ -1,4 +1,4 @@
-package com.springboot.service;
+package com.springboot.service.jpaservices;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.springboot.domain.Customer;
+import com.springboot.service.CustomerService;
 
 @Service
 @Profile("jpa")
