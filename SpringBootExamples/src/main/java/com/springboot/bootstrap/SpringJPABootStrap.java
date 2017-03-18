@@ -13,7 +13,7 @@ import com.springboot.service.CustomerService;
 import com.springboot.service.ProductService;
 
 @Component
-public class SpringJPABootStartup implements ApplicationListener<ContextRefreshedEvent>{
+public class SpringJPABootStrap implements ApplicationListener<ContextRefreshedEvent>{
 
 	private ProductService productService;
 	private CustomerService customerService;
