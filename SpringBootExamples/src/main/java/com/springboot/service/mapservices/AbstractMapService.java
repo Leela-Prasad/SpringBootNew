@@ -6,26 +6,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.springboot.domain.DomainObject;
+import com.springboot.domain.AbstractDomainClass;
 
 public abstract class AbstractMapService {
 
-	protected Map<Integer,DomainObject> domainMap;
+	protected Map<Integer,AbstractDomainClass> domainMap;
 	
 	public AbstractMapService() {
 		domainMap=new HashMap<>();
 		loadDomainObjects();
 	}
 	
-	public List<DomainObject> listAll() {
+	public List<AbstractDomainClass> listAll() {
 		return new ArrayList<>(domainMap.values());
 	}
 
-	public DomainObject getById(Integer id) {
+	public AbstractDomainClass getById(Integer id) {
 		return domainMap.get(id);
 	}
 
-	public DomainObject saveOrUpdate(DomainObject domainObject) {
+	public AbstractDomainClass saveOrUpdate(AbstractDomainClass domainObject) {
 		if(domainObject==null)
 			throw new RuntimeException("Domain Object is NULL");
 		if(domainObject.getId()==null) {

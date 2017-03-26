@@ -2,19 +2,11 @@ package com.springboot.domain;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
-import javax.persistence.Version;
 
 @Entity
-public class User implements DomainObject{
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+public class User extends AbstractDomainClass{
 	
 	private String userName;
 	
@@ -23,9 +15,6 @@ public class User implements DomainObject{
 	
 	private String encryptedPassword;
 	
-	@Version
-	private Integer version;
-	
 	private Boolean enabled=true;
 	
 	@OneToOne(cascade={CascadeType.MERGE,CascadeType.PERSIST})
@@ -33,14 +22,6 @@ public class User implements DomainObject{
 
 	@OneToOne(cascade=CascadeType.ALL,orphanRemoval=true)
 	private Cart cart;
-	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getUserName() {
 		return userName;
@@ -64,14 +45,6 @@ public class User implements DomainObject{
 
 	public void setEncryptedPassword(String encryptedPassword) {
 		this.encryptedPassword = encryptedPassword;
-	}
-
-	public Integer getVersion() {
-		return version;
-	}
-
-	public void setVersion(Integer version) {
-		this.version = version;
 	}
 
 	public Boolean getEnabled() {

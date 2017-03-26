@@ -107,6 +107,7 @@ public class UserServiceJPAImplTest {
 		user.setCustomer(customer);
 		
 		user.setCart(new Cart());
+		@SuppressWarnings("unchecked")
 		List<Product> products = (List<Product>) productService.listAll();
 		
 		CartDetail cartDetail1 = new CartDetail();
@@ -149,6 +150,7 @@ public class UserServiceJPAImplTest {
 		user.setCustomer(customer);
 		
 		user.setCart(new Cart());
+		@SuppressWarnings("unchecked")
 		List<Product> products = (List<Product>) productService.listAll();
 		
 		CartDetail cartDetail1 = new CartDetail();

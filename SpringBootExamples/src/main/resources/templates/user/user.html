@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+<title>User Details</title>
+<link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+	  th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+	  
+<script src="http://cdn.jsdelivr.net/webjars/jquery/3.1.1/jquery.min.js"
+		th:src="@{/webjars/jquery/3.1.1/jquery.min.css}"></script>	  
+</head>
+<body>
+
+	<div class="container">
+		<h2>User Details</h2>
+		<table class="table table-striped">
+			<tr>
+				<td>User Id</td>
+				<td>First Name</td>
+				<td>Last Name</td>
+				<td>Email</td>
+				<td>Phone Number</td>
+				<td>Address Line1</td>
+				<td>Address Line2</td>
+				<td>City</td>
+				<td>State</td>
+				<td>Zipcode</td>		
+			</tr>
+			<tr>
+				<td th:text="${user.id}"></td>
+				<td th:text="${user.customer.firstName}"></td>
+				<td th:text="${user.customer.lastName}"></td>
+				<td th:text="${user.customer.emailId}"></td>
+				<td th:text="${user.customer.phoneNumber}"></td>
+				<td th:text="${user.customer.billingAddress.addressLine1}"></td>
+				<td th:text="${user.customer.billingAddress.addressLine2}"></td>
+				<td th:text="${user.customer.billingAddress.city}"></td>
+				<td th:text="${user.customer.billingAddress.state}"></td>
+				<td th:text="${user.customer.billingAddress.zipcode}"></td>
+			</tr>
+		</table>
+	<div class="row">
+		<a href="/user/list">Users List</a>
+	</div>
+	</div>
+</body>
+</html>

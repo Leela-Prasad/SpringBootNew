@@ -1,47 +1,38 @@
 package com.springboot.domain;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.Version;
+import javax.persistence.Column;
 
 @Entity
-public class Customer implements DomainObject{
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
-	@Version
-	private Integer version;
+public class Customer extends AbstractDomainClass{
+	
 	private String firstName;
 	private String lastName;
 	private String emailId;
 	private String phoneNumber;
-	private String addressLine1;
-	private String addressLine2;
-	private String city;
-	private String state;
-	private String zipcode;
+	@Embedded
+	private Address billingAddress;
+	@Embedded
+	@AttributeOverrides({
+		@AttributeOverride(name="addressLine1",column=@Column(name="shipping_address_line1")),
+		@AttributeOverride(name="addressLine2",column=@Column(name="shipping_address_line2")),
+		@AttributeOverride(name="city",column=@Column(name="shipping_city")),
+		@AttributeOverride(name="state",column=@Column(name="shipping_state")),
+		@AttributeOverride(name="zipcode",column=@Column(name="shipping_zipcode"))
+	})
+	
+	private Address shippingAddress;
 	
 	@OneToOne
 	private User user;
 	
-	@Override
-	public Integer getId() {
-		return id;
-	}
-	@Override
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public Integer getVersion() {
-		return version;
-	}
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
+	/*@OneToOne
+	private Orders order;*/
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -66,36 +57,6 @@ public class Customer implements DomainObject{
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public String getAddressLine1() {
-		return addressLine1;
-	}
-	public void setAddressLine1(String addressLine1) {
-		this.addressLine1 = addressLine1;
-	}
-	public String getAddressLine2() {
-		return addressLine2;
-	}
-	public void setAddressLine2(String addressLine2) {
-		this.addressLine2 = addressLine2;
-	}
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
-	}
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
-	public String getZipcode() {
-		return zipcode;
-	}
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
-	}
 		
 	public User getUser() {
 		return user;
@@ -103,12 +64,23 @@ public class Customer implements DomainObject{
 	public void setUser(User user) {
 		this.user = user;
 	}
-	@Override
-	public String toString() {
-		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId
-				+ ", phoneNumber=" + phoneNumber + ", addressLine1=" + addressLine1 + ", addressLine2=" + addressLine2
-				+ ", city=" + city + ", state=" + state + ", zipcode=" + zipcode + "]";
+	public Address getBillingAddress() {
+		return billingAddress;
 	}
-	
+	public void setBillingAddress(Address billingAddress) {
+		this.billingAddress = billingAddress;
+	}
+	public Address getShippingAddress() {
+		return shippingAddress;
+	}
+	public void setShippingAddress(Address shippingAddress) {
+		this.shippingAddress = shippingAddress;
+	}
+	/*public Orders getOrder() {
+		return order;
+	}
+	public void setOrder(Orders order) {
+		this.order = order;
+	}*/
 	
 }

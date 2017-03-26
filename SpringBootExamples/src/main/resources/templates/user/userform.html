@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+<title>New User</title>
+<link
+	href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	rel="stylesheet" media="screen" />
+
+<script src="http://cdn.jsdelivr.net/webjars/jquery/3.1.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.1.1/jquery.min.css}"></script>
+</head>
+<body>
+
+	<div class="container">
+		<h2>New User</h2>
+		<div>
+			<form class="form-horizontal" th:object="${user}"
+				th:action="@{/user}" th:method="post">
+				<input type="hidden" th:field="${user.id}" />
+				<input type="hidden" th:field="${user.version}" />
+				<input type="hidden" th:field="${user.customer.id}" />
+				<input type="hidden" th:field="${user.customer.version}" />
+				<div class="form-group">
+					<label class="col-sm-2 control-label">User Name : </label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" th:field="${user.userName}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Password : </label>
+					<div class="col-sm-10">
+						<input type="password"  name="password" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">First Name : </label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" th:field="${user.customer.firstName}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Last Name : </label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" th:field="${user.customer.lastName}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Email : </label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" th:field="${user.customer.emailId}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Phone Number : </label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" th:field="${user.customer.phoneNumber}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Address Line1: </label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" th:field="${user.customer.billingAddress.addressLine1}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Address Line2: </label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" th:field="${user.customer.billingAddress.addressLine2}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">City: </label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" th:field="${user.customer.billingAddress.city}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">State: </label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" th:field="${user.customer.billingAddress.state}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Zipcode: </label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" th:field="${user.customer.billingAddress.zipcode}" />
+					</div>
+				</div>
+				<div class="row">
+					<button type="submit" class="btn btn-default">Submit</button>
+				</div>
+			</form>
+		</div>
+
+
+	</div>
+</body>
+</html>

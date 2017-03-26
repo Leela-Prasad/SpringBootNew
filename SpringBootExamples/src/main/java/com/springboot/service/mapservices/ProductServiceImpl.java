@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import com.springboot.domain.DomainObject;
+import com.springboot.domain.AbstractDomainClass;
 import com.springboot.domain.Product;
 import com.springboot.service.ProductService;
 
@@ -41,7 +41,7 @@ public class ProductServiceImpl extends AbstractMapService implements ProductSer
 	}
 	
 	@Override
-	public List<DomainObject> listAll() {
+	public List<AbstractDomainClass> listAll() {
 		return super.listAll();	
 	}
 

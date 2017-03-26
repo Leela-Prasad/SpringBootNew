@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import com.springboot.domain.AbstractDomainClass;
+import com.springboot.domain.Address;
 import com.springboot.domain.Customer;
-import com.springboot.domain.DomainObject;
 import com.springboot.service.CustomerService;
 
 @Service
@@ -20,36 +21,39 @@ public class CustomerServiceImpl extends AbstractMapService implements CustomerS
 		customer1.setFirstName("firstName1");
 		customer1.setLastName("lastName1");
 		customer1.setEmailId("emailId1");
-		customer1.setAddressLine1("line1");
-		customer1.setAddressLine2("line2");
-		customer1.setCity("city1");
-		customer1.setState("state1");
+		customer1.setBillingAddress(new Address());
+		customer1.getBillingAddress().setAddressLine1("line1");
+		customer1.getBillingAddress().setAddressLine2("line2");
+		customer1.getBillingAddress().setCity("city1");
+		customer1.getBillingAddress().setState("state1");
+		customer1.getBillingAddress().setZipcode("zipcode1");
 		customer1.setPhoneNumber("phoneNumber1");
-		customer1.setZipcode("zipcode1");
 		
 		Customer customer2 = new Customer();
 		customer2.setId(2);
 		customer2.setFirstName("firstName2");
 		customer2.setLastName("lastName2");
 		customer2.setEmailId("emailId2");
-		customer2.setAddressLine1("line1");
-		customer2.setAddressLine2("line2");
-		customer2.setCity("city2");
-		customer2.setState("state2");
+		customer2.setBillingAddress(new Address());
+		customer2.getBillingAddress().setAddressLine1("line1");
+		customer2.getBillingAddress().setAddressLine2("line2");
+		customer2.getBillingAddress().setCity("city2");
+		customer2.getBillingAddress().setState("state2");
+		customer2.getBillingAddress().setZipcode("zipcode2");
 		customer2.setPhoneNumber("phoneNumber2");
-		customer2.setZipcode("zipcode2");
 		
 		Customer customer3 = new Customer();
 		customer3.setId(3);
 		customer3.setFirstName("firstName3");
 		customer3.setLastName("lastName3");
 		customer3.setEmailId("emailId3");
-		customer3.setAddressLine1("line1");
-		customer3.setAddressLine2("line2");
-		customer3.setCity("city3");
-		customer3.setState("state3");
+		customer3.setBillingAddress(new Address());
+		customer3.getBillingAddress().setAddressLine1("line1");
+		customer3.getBillingAddress().setAddressLine2("line2");
+		customer3.getBillingAddress().setCity("city3");
+		customer3.getBillingAddress().setState("state3");
+		customer3.getBillingAddress().setZipcode("zipcode3");
 		customer3.setPhoneNumber("phoneNumber3");
-		customer3.setZipcode("zipcode3");
 		
 		domainMap.put(customer1.getId(),customer1);
 		domainMap.put(customer2.getId(),customer2);
@@ -57,7 +61,7 @@ public class CustomerServiceImpl extends AbstractMapService implements CustomerS
 	}
 	
 	@Override
-	public List<DomainObject> listAll() {
+	public List<AbstractDomainClass> listAll() {
 		return super.listAll();
 	}
 	
