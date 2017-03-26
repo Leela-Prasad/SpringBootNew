@@ -15,10 +15,12 @@ import com.springboot.domain.Customer;
 import com.springboot.domain.OrderDetail;
 import com.springboot.domain.Orders;
 import com.springboot.domain.Product;
+import com.springboot.domain.Role;
 import com.springboot.domain.User;
 import com.springboot.enums.OrderStatus;
 import com.springboot.service.ProductService;
 import com.springboot.service.jpaservices.OrderService;
+import com.springboot.service.jpaservices.RoleService;
 import com.springboot.service.jpaservices.UserService;
 
 
@@ -28,6 +30,7 @@ public class SpringJPABootStrap implements ApplicationListener<ContextRefreshedE
 	private ProductService productService;
 	private UserService userService;
 	private OrderService orderService;
+	private RoleService roleService;
 	
 	@Autowired
 	public void setProductService(ProductService productService) {
@@ -43,13 +46,20 @@ public class SpringJPABootStrap implements ApplicationListener<ContextRefreshedE
 	public void setOrderService(OrderService orderService) {
 		this.orderService = orderService;
 	}
+	
+	@Autowired
+	public void setRoleService(RoleService roleService) {
+		this.roleService=roleService;
+	}
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		loadProducts();
 		loadUsersAndCustomers();
 		loadCarts();
-		loadOrders(); 
+		loadOrders();
+		loadRoles();
+		assignUsersToDefaultRole();
 	}
 	
 	public void loadProducts() {
@@ -178,4 +188,31 @@ public class SpringJPABootStrap implements ApplicationListener<ContextRefreshedE
 		}
 	}
 	
+	public void loadRoles() {
+		Role role = new Role();
+		role.setRole("CUSTOMER");
+		roleService.saveOrUpdate(role);
+	}
+	
+	public void assignUsersToDefaultRole() {
+		@SuppressWarnings("unchecked")
+		List<User> users = (List<User>) userService.listAll();
+		@SuppressWarnings("unchecked")
+		List<Role> roles = (List<Role>) roleService.listAll();
+		/*for(Role arole : roles) {
+			for(User auser : users) {
+				auser.addRole(arole);
+				userService.saveOrUpdate(auser);
+			}
+		}*/
+		
+		roles.forEach(arole -> {
+			users.forEach(auser -> {
+				auser.addRole(arole);
+				userService.saveOrUpdate(auser);
+			});
+		});
+		
+		
+	}
 }

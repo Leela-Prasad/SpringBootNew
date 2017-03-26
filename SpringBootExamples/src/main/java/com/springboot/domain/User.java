@@ -1,7 +1,11 @@
 package com.springboot.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
@@ -22,6 +26,9 @@ public class User extends AbstractDomainClass{
 
 	@OneToOne(cascade=CascadeType.ALL,orphanRemoval=true)
 	private Cart cart;
+	
+	@ManyToMany
+	private List<Role> roles = new ArrayList<>();
 
 	public String getUserName() {
 		return userName;
@@ -70,6 +77,28 @@ public class User extends AbstractDomainClass{
 
 	public void setCart(Cart cart) {
 		this.cart = cart;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+	
+	public void addRole(Role role) {
+		if(!(roles.contains(role))) {
+			roles.add(role);
+		}
+		if(!(role.getUsers().contains(this))) {
+			role.getUsers().add(this);
+		}
+	}
+	
+	public void removeRole(Role role) {
+		roles.remove(role);
+		role.getUsers().remove(this);
 	}
 	
 }
