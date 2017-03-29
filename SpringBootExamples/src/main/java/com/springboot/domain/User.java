@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
@@ -27,7 +28,7 @@ public class User extends AbstractDomainClass{
 	@OneToOne(cascade=CascadeType.ALL,orphanRemoval=true)
 	private Cart cart;
 	
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	private List<Role> roles = new ArrayList<>();
 
 	public String getUserName() {

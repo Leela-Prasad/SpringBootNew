@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 
 @Entity
@@ -11,7 +12,7 @@ public class Role extends AbstractDomainClass {
 
 	private String role;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy="roles",fetch=FetchType.EAGER)
 	private List<User> users = new ArrayList<>();
 
 	public String getRole() {
