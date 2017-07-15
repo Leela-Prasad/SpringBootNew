@@ -1,6 +1,7 @@
 package com.springboot.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ public class UserController {
 		this.userService=userService;
 	}
 	
+	@PreAuthorize("hasAnyRole('admin')")
 	@RequestMapping({"/list","/"})
 	public String listUsers(Model model) {
 		model.addAttribute("users",userService.listAll());

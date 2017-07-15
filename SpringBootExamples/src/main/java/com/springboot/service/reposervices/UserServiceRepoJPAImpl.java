@@ -10,12 +10,20 @@ import org.springframework.stereotype.Service;
 import com.springboot.domain.User;
 import com.springboot.repositories.UserRepository;
 import com.springboot.service.jpaservices.UserService;
+import com.springboot.service.security.EncryptionService;
 
 @Service
 @Profile({"springdatajpa"})
 public class UserServiceRepoJPAImpl implements UserService {
 
 	private UserRepository userRepository;
+	
+	private EncryptionService encryptorService;
+	
+	@Autowired
+	public void setEncryptorService(EncryptionService encryptorService) {
+		this.encryptorService=encryptorService;
+	}
 	
 	@Autowired
 	public void setUserRepository(UserRepository userRepository) {
@@ -36,6 +44,9 @@ public class UserServiceRepoJPAImpl implements UserService {
 
 	@Override
 	public User saveOrUpdate(User domainObject) {
+		if(domainObject.getPassword()!=null) {
+			domainObject.setEncryptedPassword(encryptorService.encryptString(domainObject.getPassword()));
+		}
 		return userRepository.save(domainObject);
 	}
 

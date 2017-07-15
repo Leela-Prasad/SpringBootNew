@@ -45,4 +45,9 @@ public class Role extends AbstractDomainClass {
 			users.remove(user);
 			user.getRoles().remove(this);
 	}
+	
+	@Override
+	public String toString() {
+		return role;
+	}
 }

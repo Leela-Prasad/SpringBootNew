@@ -14,6 +14,7 @@ public class EncryptionServiceImpl implements EncryptionService{
 		this.encryptor=encryptor;
 	}
 	
+	
 	@Override
 	public String encryptString(String input) {
 		return encryptor.encryptPassword(input);

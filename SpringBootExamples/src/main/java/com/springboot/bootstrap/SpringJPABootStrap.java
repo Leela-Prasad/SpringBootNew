@@ -60,6 +60,7 @@ public class SpringJPABootStrap implements ApplicationListener<ContextRefreshedE
 		loadOrders();
 		loadRoles();
 		assignUsersToDefaultRole();
+		assignUsersToAdminRole();
 	}
 	
 	public void loadProducts() {
@@ -212,6 +213,28 @@ public class SpringJPABootStrap implements ApplicationListener<ContextRefreshedE
 				userService.saveOrUpdate(auser);
 			});
 		});
+		
+		
+	}
+	
+	public void assignUsersToAdminRole() {
+		@SuppressWarnings("unchecked")
+		List<User> users = (List<User>) userService.listAll();
+		
+			
+		Role role = new Role();
+		role.setRole("admin");
+		roleService.saveOrUpdate(role);
+		
+			users.forEach(auser -> {
+				if(auser.getUserName().equalsIgnoreCase("user3")) {		
+					User user = new User();
+					user=auser;
+					user.addRole(role);
+					role.addUser(user);
+					userService.saveOrUpdate(user);
+
+				}});
 		
 		
 	}
