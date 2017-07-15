@@ -22,6 +22,8 @@ public class User extends AbstractDomainClass{
 	
 	private Boolean enabled=true;
 	
+	private Integer noOfFailureAttempts;
+	
 	@OneToOne(cascade={CascadeType.MERGE,CascadeType.PERSIST})
 	private Customer customer;
 
@@ -88,6 +90,14 @@ public class User extends AbstractDomainClass{
 		this.roles = roles;
 	}
 	
+	public Integer getNoOfFailureAttempts() {
+		return noOfFailureAttempts;
+	}
+
+	public void setNoOfFailureAttempts(Integer noOfFailureAttempts) {
+		this.noOfFailureAttempts = noOfFailureAttempts;
+	}
+
 	public void addRole(Role role) {
 		if(!(roles.contains(role))) {
 			roles.add(role);
