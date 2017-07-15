@@ -1,5 +1,7 @@
 package com.springboot.listeners;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.core.Authentication;
@@ -35,7 +37,7 @@ public class LoginFailureListener implements ApplicationListener<LoginFailureEve
 	}
 
 	private void updateUserAccount(Authentication authentication) {
-		User user = userRepository.findByUserName((String)authentication.getPrincipal());
+		/*User user = userRepository.findByUserName((String)authentication.getPrincipal());
 		
 		if(user!=null) {
 			Integer failAttempts = user.getNoOfFailureAttempts();
@@ -54,8 +56,27 @@ public class LoginFailureListener implements ApplicationListener<LoginFailureEve
 			}
 			
 			userService.saveOrUpdate(user);
-		}
+		}*/
 		
+		Optional<User> optional = userRepository.findByUserName((String)authentication.getPrincipal());
+		
+		optional.ifPresent(user -> {
+			Integer failAttempts = user.getNoOfFailureAttempts();
+			if(failAttempts==null) {
+				failAttempts=1;
+				user.setNoOfFailureAttempts(1);
+			}	
+			else {
+				++failAttempts;
+				user.setNoOfFailureAttempts(failAttempts);
+			}
+				
+			if(failAttempts >= 3) {
+				user.setEnabled(false);
+			}
+			
+			userService.saveOrUpdate(user);
+		});
 	}
 
 	

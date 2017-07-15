@@ -1,5 +1,7 @@
 package com.springboot.service.security;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,12 +19,13 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.findByUserName(username);
-		if(user!=null)
+		Optional<User> optional = userRepository.findByUserName(username);
+		if(optional.isPresent()) {
+			User user = optional.get();
 			return new CustomUserDetails(user);
-		else 
+		}else {
 			return null;
-		
+		}		
 	}
 
 }

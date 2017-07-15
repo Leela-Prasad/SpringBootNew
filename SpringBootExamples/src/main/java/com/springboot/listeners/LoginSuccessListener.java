@@ -1,5 +1,7 @@
 package com.springboot.listeners;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.core.Authentication;
@@ -37,9 +39,11 @@ public class LoginSuccessListener implements ApplicationListener<LoginSuccessEve
 
 	private void updateUserAccount(Authentication authentication) {
 		String userName = ((UserDetails)authentication.getPrincipal()).getUsername();
-		User user = userRepository.findByUserName(userName);
-		user.setNoOfFailureAttempts(0);
-		userService.saveOrUpdate(user);
+		Optional<User> optional = userRepository.findByUserName(userName);
+		optional.ifPresent(user -> {
+			user.setNoOfFailureAttempts(0);
+			userService.saveOrUpdate(user);
+		});
 	}
 
 	
